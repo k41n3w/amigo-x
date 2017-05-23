@@ -1,0 +1,103 @@
+<header class="header-page edit-request">
+    <h1>Pesquisar Grupos</h1>
+</header>
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <section class="box fix-height">
+        <form
+            id="formBuscaUsuario"
+            name="formBuscaUsuario"
+            ng-submit="searchResult()"
+            class="col-lg-8 col-md-10 col-xs-12 form-center"
+        >
+            <div
+                class="filtro open form-label col-xs-12 col-md-12"
+            >
+                <label
+                    class="nicelabel"
+                    for="txtBuscaNome"
+                >
+                    Nome Grupo
+                </label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="txtBuscaNome"
+                    name="txtBuscaNome"
+                    aria-label="Nome"
+                    ng-model="search.name"
+                />
+            </div>
+            <div class="both"></div>
+            <div class="form-label col-md-12 col-sm-12 col-xs-12 text-center">
+                <button
+                    class="btn btn-primary btn-form-search"
+                    type="submit"
+                >
+                    Pesquisar
+                </button>
+            </div>
+            <div class="both"></div>
+        </form>
+        <div class="both"></div>
+        <div
+            id="search-result"
+            class="col-lg-10 col-md-12 col-xs-12 form-center table-new-responsive table-result"
+            ng-if="gridOptions.data.length > 0"
+        >
+            <div
+                ui-grid="gridOptions"
+                ui-grid-pagination
+                ui-grid-auto-resize
+            ></div>
+        </div>
+        <div ng-if="gridOptions.data.length == 0">
+            <div
+                class="noResult well text-center col-md-8 col-xs-12 center"
+            >
+                <span>Resultado não encontrado.</span>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div
+    id="modalEntrarGrupo"
+    class="modal fade"
+    role="dialog"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                    ng-click="modalCancelar()"
+                >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">
+                    <span class="modalTipo"></span> Deseja Realmente Entrar no Grupo {{nameGroup}}?
+                </h4>
+            </div>
+                <div class="modal-footer text-center">
+                    <input
+                        id="cancel-create-department"
+                        class="btn btn-default"
+                        type="button"
+                        value="Cancelar"
+                        data-dismiss="modal"
+                        ng-click="modalCancelar()"
+                    />
+                    <input
+                        class="btn btn-primary btn-form-create"
+                        type="submit"
+                        value="Entrar"
+                        data-dismiss="modal"
+                        ng-click="entrarGrupo();"
+                    />
+                </div>
+        </div>
+    </div>
+</div>

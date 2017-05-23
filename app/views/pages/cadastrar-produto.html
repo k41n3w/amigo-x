@@ -1,0 +1,178 @@
+<header class="header-page edit-request">
+    <h1>Produtos</h1>
+</header>
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <section class="box fix-height">
+                  <form
+                      id="loginForm"
+                      name="loginForm"
+                      role="form"
+                      ng-submit="cadastrar()"
+                      novalidate
+                  >
+                      <div
+                          class="form-label"
+                      >
+                          <label
+                              class="nicelabel"
+                              for="txtDescription"
+                          >
+                              Description
+                          </label>
+                          <input
+                              ng-model="produto.description"
+                              required
+                              type="text"
+                              class="form-control"
+                              id="description"
+                              name="description"
+                              aria-label="description"
+                          />
+                    </div>
+                    <div
+                        class="form-label"
+                    >
+                          <label
+                              class="nicelabel"
+                              for="txtValue"
+                          >
+                              Valor
+                          </label>
+                          <input
+                              ng-model="produto.value"
+                              required
+                              type="number"
+                              class="form-control"
+                              id="value"
+                              name="value"
+                              aria-label="value"
+                          />
+                          <div
+                              class="tooltip top alert-tooltip"
+                              role="tooltip"
+                          >
+                              <div class="tooltip-arrow"></div>
+                              <div class="tooltip-inner">
+                                  Este campo é obrigatório.
+                              </div>
+                          </div>
+                      </div>
+                      <div class="both"></div>
+
+                      <div class="form-label text-center">
+                          <input
+                              class="btn btn-primary"
+
+                              value="Pesquisar"
+                              ng-click="searchProdutos()"
+                          />
+                          <input
+                              class="btn btn-primary"
+                              type="submit"
+                              value="Cadastrar"
+                              ng-disabled="loginForm.$invalid"
+                          />
+                      </div>
+                  </form>
+                  <div
+                      id="search-result"
+                      class="col-lg-10 col-md-12 col-xs-12 form-center table-new-responsive table-result"
+                      ng-if="gridOptions.data.length > 0"
+                  >
+                      <div
+                          ui-grid="gridOptions"
+                          ui-grid-pagination
+                          ui-grid-auto-resize
+                      ></div>
+                  </div>
+                  <div ng-if="gridOptions.data.length == 0">
+                      <div
+                          class="noResult well text-center col-md-8 col-xs-12 center"
+                      >
+                          <span>Resultado não encontrado.</span>
+                      </div>
+                  </div>
+    </section>
+</div>
+<div
+    id="modalComprar"
+    class="modal fade"
+    role="dialog"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                    ng-click="modalCancelar()"
+                >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">
+                    <span class="modalTipo"></span> Deseja Realmente Comprar o Produto {{description}}?
+                </h4>
+            </div>
+                <div class="modal-footer text-center">
+                    <input
+                        id="cancel-create-department"
+                        class="btn btn-default"
+                        type="button"
+                        value="Cancelar"
+                        data-dismiss="modal"
+                        ng-click="modalCancelar()"
+                    />
+                    <input
+                        class="btn btn-primary btn-form-create"
+                        type="submit"
+                        value="Comprar"
+                        data-dismiss="modal"
+                        ng-click="venderProduto();"
+                    />
+                </div>
+        </div>
+    </div>
+</div>
+<div
+    id="modalDesejar"
+    class="modal fade"
+    role="dialog"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                    ng-click="modalCancelar()"
+                >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">
+                    <span class="modalTipo"></span> Você deseja este produto {{description}}?
+                </h4>
+            </div>
+                <div class="modal-footer text-center">
+                    <input
+                        id="cancel-create-department"
+                        class="btn btn-default"
+                        type="button"
+                        value="Cancelar"
+                        data-dismiss="modal"
+                        ng-click="modalCancelar()"
+                    />
+                    <input
+                        class="btn btn-primary btn-form-create"
+                        type="submit"
+                        value="Desejar"
+                        data-dismiss="modal"
+                        ng-click="desejarProduto();"
+                    />
+                </div>
+        </div>
+    </div>
+</div>

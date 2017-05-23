@@ -1,0 +1,25 @@
+<header class="header-page edit-request">
+    <h1>Meus Desejos</h1>
+</header>
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <section class="box fix-height">
+                  <div
+                      id="search-result"
+                      class="col-lg-10 col-md-12 col-xs-12 form-center table-new-responsive table-result"
+                      ng-if="gridOptions.data.length > 0"
+                  >
+                      <div
+                          ui-grid="gridOptions"
+                          ui-grid-pagination
+                          ui-grid-auto-resize
+                      ></div>
+                  </div>
+                  <div ng-if="gridOptions.data.length == 0">
+                      <div
+                          class="noResult well text-center col-md-8 col-xs-12 center"
+                      >
+                          <span>Resultado não encontrado.</span>
+                      </div>
+                  </div>
+    </section>
+</div>

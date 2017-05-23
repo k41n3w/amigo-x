@@ -1,0 +1,82 @@
+<header class="header-page edit-request">
+    <h1>Editar Senha</h1>
+</header>
+
+<div
+    class="col-md-12 col-sm-12 col-xs-12"
+>
+    <section class="box fix-height">
+        <form
+            name="trocaSenha"
+            id="trocaSenha"
+            class="col-xs-12 col-md-6 col-lg-4 form-center"
+            ng-submit="changePassword()"
+        >
+            <div class="form-label col-md-12 col-sm-12 col-xs-12">
+                <label
+                    class="nicelabel"
+                    for="title"
+                >
+                    Senha atual*
+                </label>
+                <input
+                    type="password"
+                    class="form-control"
+                    id="title"
+                    placeholder="Senha atual"
+                    ng-model="request.oldPasswd"
+                    maxlength="40"
+                    aria-label="Senha atual"
+                />
+            </div>
+            <div class="form-label col-md-12 col-sm-12 col-xs-12">
+                <label
+                    class="nicelabel"
+                    for="newPasswd"
+                >
+                    Nova senha*
+                </label>
+                <input
+                    type="password"
+                    class="form-control"
+                    name="newPasswd"
+                    id="newPasswd"
+                    placeholder="Nova senha"
+                    ng-model="request.newPasswd"
+                    maxlength="40"
+                    aria-label="Nova senha"
+                />
+            </div>
+            <div class="form-label col-md-12 col-sm-12 col-xs-12">
+                <label
+                    class="nicelabel"
+                    for="confirmPasswd"
+                >
+                    Repitir nova senha*
+                </label>
+                <input
+                    type="password"
+                    class="form-control"
+                    name="confirmPasswd"
+                    id="confirmPasswd"
+                    placeholder="Repitir nova senha"
+                    ng-model="request.confirmPasswd"
+                    ng-pattern="request.newPasswd"
+                    maxlength="40"
+                    aria-label="Repitir nova senha"
+                />
+            </div>
+            <div class="form-label text-center col-md-12 col-sm-12 col-xs-12">
+                <button
+                    class="btn btn-primary btn-form-create"
+                    type="submit"
+                    ng-disabled="trocaSenha.confirmPasswd.$error.pattern || (!request.newPasswd || !request.confirmPasswd)"
+                    title="{{ trocaSenha.confirmPasswd.$error.pattern ? 'As senhas são diferentes' : '' }}"
+                >
+                    Salvar
+                </button>
+            </div>
+        </form>
+        <div class="both"></div>
+    </section>
+</div>

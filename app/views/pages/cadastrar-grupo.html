@@ -1,0 +1,52 @@
+<header class="header-page edit-request">
+    <h1>Cadastrar Grupo</h1>
+</header>
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <section class="box fix-height">
+                  <form
+                      id="loginForm"
+                      name="loginForm"
+                      role="form"
+                      ng-submit="cadastrar()"
+                      novalidate
+                  >
+                      <div
+                          class="form-label"
+                          ng-class="{ 'has-error' : loginForm.login.$invalid && submitted }"
+                      >
+                          <label
+                              class="nicelabel"
+                              for="txtNome"
+                          >
+                              Nome
+                          </label>
+                          <input
+                              ng-model="user.name"
+                              required
+                              type="text"
+                              class="form-control"
+                              id="name"
+                              name="name"
+                              aria-label="name"
+                          />
+                          <div
+                              class="tooltip top alert-tooltip"
+                              role="tooltip"
+                          >
+                              <div class="tooltip-arrow"></div>
+                              <div class="tooltip-inner">
+                                  Este campo é obrigatório.
+                              </div>
+                          </div>
+                      </div>
+                      <div class="form-label text-center">
+                          <input
+                              class="btn btn-primary"
+                              type="submit"
+                              value="Cadastrar"
+                          />
+                      </div>
+                  </form>
+    </div>
+    </section>
+</div>

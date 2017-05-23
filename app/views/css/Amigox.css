@@ -1,0 +1,198 @@
+/* página: requisições / dashboard.html */
+
+#search-request {margin-bottom: 1em;}
+
+.ui-grid-row .success,
+.ui-grid-row .success a {
+  color: #3c763d;
+}
+
+.ui-grid-row .danger,
+.ui-grid-row .danger a  {
+  color: #a94442 !important;
+}
+
+/*.ui-grid-row .refused {
+  color: #aaa;
+  background: #f9f9f9;
+}*/
+
+.ui-grid-row .refused, .ui-grid-row .refused a {color: #aaa;}
+
+.ui-grid-row .info,
+.ui-grid-row .info a {color: #31708f;}
+
+.request-summary-item {
+  font-size: 0.9em;
+  display: block;
+  margin-right: 0.5em;
+  padding:0.2em;
+  text-align: center;
+  border-radius: 0.2em;
+  -moz-border-radius: 0.2em;
+  -webkit-border-radius: 0.2em;
+  -o-border-radius: 0.2em;
+  -ms-border-radius: 0.2em;
+}
+
+.request-summary-item.has-refused {
+  border: 0.1em solid #eee;
+  background: #f9f9f9;
+  color: #aaa;
+}
+
+.request-summary-item.has-finished {
+  border: 0.1em solid #bce8f1;
+  background: #d9edf7;
+  color: #31708f;
+}
+
+.request-summary-item.has-success {
+  border: 0.1em solid #d6e9c6;
+  background: #dff0d8;
+  color: #3c763d;
+}
+
+.request-summary-item.has-danger {
+  border: 0.1em solid #ebccd1;
+  background: #f2dede;
+  color: #a94442;
+}
+
+.request-summary-item.has-dev {
+  border: 0.1em solid #eee;
+  background: #fff;
+  color: #003661;
+}
+
+/* add/edit requisição */
+
+.form-label.box-tab {padding: 1em 0;}
+
+.tab-border {
+  border: 1px solid #ccc;
+  border-top: 0;
+  padding: 0.5em 0;
+}
+
+.btn-fluxo {
+  width: 100%;
+  text-align: left;
+  margin-top: 1.5em;
+}
+
+.btn-fluxo i {margin-right: 0.5em;}
+
+/* timeline requisição */
+
+.title-info-request {padding-top: 0;}
+
+.info-request {
+  margin: 0.4em 0;
+  word-wrap: break-word;
+}
+
+.info-request .alert-danger {
+  padding: 0 0.5em;
+  border: 0.1em solid #ebccd1;
+  border-radius: 0.2em;
+  -moz-border-radius: 0.2em;
+  -webkit-border-radius: 0.2em;
+  -o-border-radius: 0.2em;
+  -ms-border-radius: 0.2em;
+}
+
+#box-info-request,
+.optionsRequest {
+  margin-top: 1.5em;
+}
+
+#box-info-request .btn-optionsRequest {margin: 0.1em;}
+
+
+@media (max-width: 1024px) {
+
+  #request-received-table th:nth-of-type(7) {min-width: 85px !important;}
+
+  .btn-fluxo i {margin-right: 0;}
+}
+
+/* media query */
+
+@media (max-width: 767px) {
+    .chart-request-delayed {
+        display: none;
+    }
+
+  .btn-fluxo i {margin-right: 0.5em;}
+
+  .request-summary-item {
+    font-size: 1em;
+    width: 100% !important;
+  }
+
+  #table-level td:nth-of-type(1):before { content: "Nível"; }
+  #table-level td:nth-of-type(2):before { content: "Departamento"; }
+
+  #search-user-table td:nth-of-type(1):before { content: "Nome"; }
+  #search-user-table td:nth-of-type(2):before { content: "Departamento"; }
+  #search-user-table td:nth-of-type(3):before { content: "Nível"; }
+
+  #table-type td:nth-of-type(1):before { content: "Tipo"; }
+  #table-type td:nth-of-type(2):before { content: "Departamento"; }
+
+  #request-received-table td:nth-of-type(1):before { content: "ID"; }
+  #request-received-table td:nth-of-type(2):before { content: "Título"; }
+  #request-received-table td:nth-of-type(3):before { content: "Requisitante"; }
+  #request-received-table td:nth-of-type(4):before { content: "Data de Abertura"; }
+  #request-received-table td:nth-of-type(5):before { content: "Prazo Limite"; }
+  #request-received-table td:nth-of-type(6):before { content: "Prioridade"; }
+  #request-received-table td:nth-of-type(7):before { content: "Status"; }
+  #request-received-table td:nth-of-type(8):before { content: "Andamento"; }
+
+  #request-sent-table td:nth-of-type(1):before { content: "ID"; }
+  #request-sent-table td:nth-of-type(2):before { content: "Título"; }
+  #request-sent-table td:nth-of-type(3):before { content: "Responsável"; }
+  #request-sent-table td:nth-of-type(4):before { content: "Data de Abertura"; }
+  #request-sent-table td:nth-of-type(5):before { content: "Prazo Limite"; }
+  #request-sent-table td:nth-of-type(6):before { content: "Prioridade"; }
+  #request-sent-table td:nth-of-type(7):before { content: "Status"; }
+  #request-sent-table td:nth-of-type(8):before { content: "Andamento"; }
+
+  #request-received-table-department td:nth-of-type(1):before { content: "ID"; }
+  #request-received-table-department td:nth-of-type(2):before { content: "Título"; }
+  #request-received-table-department td:nth-of-type(3):before { content: "Requisitante"; }
+  #request-received-table-department td:nth-of-type(4):before { content: "Responsável"; }
+  #request-received-table-department td:nth-of-type(5):before { content: "Data de Abertura"; }
+  #request-received-table-department td:nth-of-type(6):before { content: "Prazo Limite"; }
+  #request-received-table-department td:nth-of-type(7):before { content: "Prioridade"; }
+  #request-received-table-department td:nth-of-type(8):before { content: "Status"; }
+  #request-received-table-department td:nth-of-type(9):before { content: "Andamento"; }
+
+  #request-sent-table-department td:nth-of-type(1):before { content: "ID"; }
+  #request-sent-table-department td:nth-of-type(2):before { content: "Título"; }
+  #request-sent-table-department td:nth-of-type(3):before { content: "Responsável"; }
+  #request-sent-table-department td:nth-of-type(4):before { content: "Requisitante"; }
+  #request-sent-table-department td:nth-of-type(5):before { content: "Data de Abertura"; }
+  #request-sent-table-department td:nth-of-type(6):before { content: "Prazo Limite"; }
+  #request-sent-table-department td:nth-of-type(7):before { content: "Prioridade"; }
+  #request-sent-table-department td:nth-of-type(8):before { content: "Status"; }
+  #request-sent-table-department td:nth-of-type(9):before { content: "Andamento"; }
+
+  .text-dep-received:before {content: "Dep. Recebidas"}
+  .text-dep-sent:before {content: "Dep. Enviadas"}
+
+  #request-delayed-table td:nth-of-type(1):before { content: "Enviar notificação"; }
+  #request-delayed-table td:nth-of-type(2):before { content: "Título"; }
+  #request-delayed-table td:nth-of-type(3):before { content: "Responsável"; }
+  #request-delayed-table td:nth-of-type(4):before { content: "Vencimento"; }
+  #request-delayed-table td:nth-of-type(5):before { content: "Atraso"; }
+  #request-delayed-table td:nth-of-type(6):before { content: "Prioridade"; }
+  #request-delayed-table td:nth-of-type(7):before { content: "Notificações"; }
+}
+
+/* permissões */
+
+.permission-table {
+    margin-top: 2em;
+}

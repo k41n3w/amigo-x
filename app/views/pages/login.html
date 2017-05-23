@@ -1,0 +1,81 @@
+<div>
+    <div
+        id="login-box"
+        class="col-xs-12 col-md-3 col-lg-3 form-center"
+    >
+        <section class="box">
+            <form
+                id="loginForm"
+                name="loginForm"
+                role="form"
+                ng-submit="login()"
+                novalidate
+            >
+                <div
+                    class="form-label"
+                    ng-class="{ 'has-error' : loginForm.login.$invalid && submitted }"
+                >
+                    <label
+                        class="nicelabel"
+                        for="txtName"
+                    >
+                        Login
+                    </label>
+                    <input
+                        ng-model="user.strLogin"
+                        required
+                        type="text"
+                        class="form-control"
+                        id="login"
+                        name="login"
+                        aria-label="Login"
+                    />
+                    <div
+                        class="tooltip top alert-tooltip"
+                        role="tooltip"
+                    >
+                        <div class="tooltip-arrow"></div>
+                        <div class="tooltip-inner">
+                            Este campo é obrigatório.
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="form-label"
+                    ng-class="{ 'has-error' : loginForm.password.$invalid && submitted }"
+                >
+                    <label
+                        class="nicelabel"
+                        for="txtName"
+                    >
+                        Senha
+                    </label>
+                    <input
+                        ng-model="user.strSenha"
+                        required type="password"
+                        class="form-control"
+                        id="password"
+                        name="password"
+                        aria-label="Senha"
+                    />
+                    <div
+                        class="tooltip top alert-tooltip"
+                        role="tooltip"
+                    >
+                        <div class="tooltip-arrow"></div>
+                        <div class="tooltip-inner">
+                            Este campo é obrigatório.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-label text-center">
+                    <input
+                        class="btn btn-primary"
+                        type="submit"
+                        value="Entrar"
+                    />
+                </div>
+            </form>
+        </section>
+      </div>
+</div>

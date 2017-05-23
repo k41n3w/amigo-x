@@ -1,0 +1,104 @@
+/* fontes */
+body {font: 0.8em/1.4em 'Open Sans','trebuchet ms','dejavu sans', sans-serif;}
+
+@font-face {
+  font-family: Cocon;
+  src: url(../fonts/cocon.otf);
+}
+
+h1, h2, h3, h4, h5, h6 {font-family: 'Montserrat','trebuchet ms','dejavu sans', sans-serif;}
+
+.navbar-brand span {font-family: Cocon, 'trebuchet ms','dejavu sans', sans-serif;}
+
+/* bg header page */
+
+.header-page {background-image: url(../images/bg-requisicao2.jpg);}
+.header-page h1 {color: #fff;}
+
+/* cores */
+body,
+.table .line-color,
+.table-striped>tbody>tr:nth-of-type(odd) {
+  background: #ecf0f5;
+}
+
+.dropdown-menu:before {border-bottom-color: #0060ac;}
+
+.tooltip.top .tooltip-arrow {border-top-color: #0060ac;}
+
+.modal-header,
+.progress-bar,
+.tooltip.top .tooltip-inner,
+.pagination>.active>a,
+.pagination>.active>span,
+.pagination>.active>a:hover,
+.pagination>.active>span:hover,
+.pagination>.active>a:focus,
+.pagination>.active>span:focus,
+.bootstrap-datetimepicker-widget table td.active,
+.bootstrap-datetimepicker-widget table td.active:hover,
+.panel-default>.panel-heading,
+.dropdown .icon-user,
+.dropdown-menu,
+#sidebar .nav>li>a:hover,
+#sidebar .nav>li.active>a,
+.second-nav li a:hover,
+.second-nav li.active a,
+.timeline-date,
+.block-ui-message {
+  background: #0060ac;
+  color: #fff;
+}
+
+.pagination>li>a,
+.pagination>li>span,
+a:hover,
+.navbar-brand span,
+#menu-slide a.navbar-toggle,
+.timeline-heading span {
+  color: #0060ac;
+}
+
+.dropdown-menu>li>a:hover,
+.dropdown-menu>li>a:focus {
+  background: #0075D1;
+  color: #fff;
+}
+
+.table thead tr,
+.div-table-list .header-list,
+.table thead tr,
+#sidebar,
+#sidebar .nav>li,
+#sidebar .nav>li>a,
+#sidebar .nav>li>a:focus {
+  background: #003661;
+  color: #fff;
+}
+
+a, a:link, a:focus, a:active, a:visited {color: #003661;}
+
+.second-nav,
+.second-nav li a {
+  background: #003E73;
+  color: #fff;
+}
+
+.btn-primary,
+a.btn-primary{
+  background: #2eaeb9;
+  border: 0.1em solid #2aa1ab;
+  color: #fff !important;
+}
+
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:focus {
+  background: #2aa1ab !important;
+  border: 0.1em solid #2aa1ab !important;
+}
+
+.bootstrap-datetimepicker-widget.dropdown-menu {
+  background: #fff !important;
+  color: #333;
+}
