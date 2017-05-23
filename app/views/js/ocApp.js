@@ -18,9 +18,8 @@ var ocApp = angular.module('ocApp', ['ngRoute', 'angularFileUpload', 'blockUI', 
         });
     });
 
-// Constante com a URL da aplicação
-ocApp.constant('BASEURL', 'http://192.168.113.59/amigo-x/api/');
-//ocApp.constant('BASEURL', 'http://localhost/amigo-x/backend-Amigox/api/');
+// Constante com a URL da aplicação // Altere para que atenda seu local de instalação
+ocApp.constant('BASEURL', 'http://192.168.113.86/amigo-x/api/');
 
 /*
  * "Injeta" a factory 'AuthInterceptor' nas chamadas ao servidor.
