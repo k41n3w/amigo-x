@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `amigo_x` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `amigo_x`;
 -- MySQL dump 10.13  Distrib 5.7.12, for linux-glibc2.5 (x86_64)
 --
 -- Host: localhost    Database: amigo_x
@@ -18,6 +16,35 @@ USE `amigo_x`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `Desejo`
+--
+
+DROP TABLE IF EXISTS `Desejo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Desejo` (
+  `idDesejo` int(11) NOT NULL AUTO_INCREMENT,
+  `iduser` int(11) NOT NULL,
+  `idproducts` int(11) NOT NULL,
+  PRIMARY KEY (`idDesejo`),
+  KEY `fk_Desejo_1_idx` (`iduser`),
+  KEY `fk_Desejo_2_idx` (`idproducts`),
+  CONSTRAINT `fk_Desejo_1` FOREIGN KEY (`iduser`) REFERENCES `User` (`iduser`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Desejo_2` FOREIGN KEY (`idproducts`) REFERENCES `Products` (`idproducts`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Desejo`
+--
+
+LOCK TABLES `Desejo` WRITE;
+/*!40000 ALTER TABLE `Desejo` DISABLE KEYS */;
+INSERT INTO `Desejo` VALUES (1,2,1),(2,2,2),(3,3,1),(4,6,1);
+/*!40000 ALTER TABLE `Desejo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Groups_in`
 --
 
@@ -34,7 +61,7 @@ CREATE TABLE `Groups_in` (
   KEY `fk_Groups_in_2_idx` (`iduser`),
   CONSTRAINT `fk_Groups_in_1` FOREIGN KEY (`idgroup`) REFERENCES `Grupo` (`idgroup`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Groups_in_2` FOREIGN KEY (`iduser`) REFERENCES `User` (`iduser`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +70,7 @@ CREATE TABLE `Groups_in` (
 
 LOCK TABLES `Groups_in` WRITE;
 /*!40000 ALTER TABLE `Groups_in` DISABLE KEYS */;
-INSERT INTO `Groups_in` VALUES (1,1,2,0),(2,1,3,0),(3,1,4,0),(4,1,5,0);
+INSERT INTO `Groups_in` VALUES (1,1,2,0),(2,1,3,0),(3,1,4,0),(4,1,5,0),(5,6,6,0),(6,7,2,0);
 /*!40000 ALTER TABLE `Groups_in` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,8 +84,11 @@ DROP TABLE IF EXISTS `Grupo`;
 CREATE TABLE `Grupo` (
   `idgroup` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
-  PRIMARY KEY (`idgroup`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `owner` int(11) NOT NULL,
+  PRIMARY KEY (`idgroup`),
+  KEY `fk_Grupo_1_idx` (`owner`),
+  CONSTRAINT `fk_Grupo_1` FOREIGN KEY (`owner`) REFERENCES `User` (`iduser`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +97,7 @@ CREATE TABLE `Grupo` (
 
 LOCK TABLES `Grupo` WRITE;
 /*!40000 ALTER TABLE `Grupo` DISABLE KEYS */;
-INSERT INTO `Grupo` VALUES (1,'Teste 2');
+INSERT INTO `Grupo` VALUES (1,'Grupo 2',2),(2,'Grupo 3',3),(3,'Grupo 4',4),(5,'Grupo 5',5),(6,'Grupo Jeff',6),(7,'',2);
 /*!40000 ALTER TABLE `Grupo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +120,7 @@ CREATE TABLE `Lottery_relation` (
   CONSTRAINT `fk_Lottery_relation_1` FOREIGN KEY (`idgroup`) REFERENCES `Grupo` (`idgroup`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Lottery_relation_2` FOREIGN KEY (`iduserorigin`) REFERENCES `User` (`iduser`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Lottery_relation_3` FOREIGN KEY (`iduserdestination`) REFERENCES `User` (`iduser`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,6 +129,7 @@ CREATE TABLE `Lottery_relation` (
 
 LOCK TABLES `Lottery_relation` WRITE;
 /*!40000 ALTER TABLE `Lottery_relation` DISABLE KEYS */;
+INSERT INTO `Lottery_relation` VALUES (1,1,2,3),(2,1,3,2);
 /*!40000 ALTER TABLE `Lottery_relation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +176,7 @@ CREATE TABLE `Products` (
   `description` varchar(255) NOT NULL,
   `value` float NOT NULL,
   PRIMARY KEY (`idproducts`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,7 +185,7 @@ CREATE TABLE `Products` (
 
 LOCK TABLES `Products` WRITE;
 /*!40000 ALTER TABLE `Products` DISABLE KEYS */;
-INSERT INTO `Products` VALUES (1,'Teste 3',30);
+INSERT INTO `Products` VALUES (1,'Teste 3',30),(2,'a',1);
 /*!40000 ALTER TABLE `Products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -174,7 +205,7 @@ CREATE TABLE `Sells` (
   KEY `fk_Sells_2_idx` (`iduser`),
   CONSTRAINT `fk_Sells_1` FOREIGN KEY (`idproducts`) REFERENCES `Products` (`idproducts`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Sells_2` FOREIGN KEY (`iduser`) REFERENCES `User` (`iduser`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -183,7 +214,7 @@ CREATE TABLE `Sells` (
 
 LOCK TABLES `Sells` WRITE;
 /*!40000 ALTER TABLE `Sells` DISABLE KEYS */;
-INSERT INTO `Sells` VALUES (1,1,2);
+INSERT INTO `Sells` VALUES (1,1,2),(2,2,3),(3,1,6);
 /*!40000 ALTER TABLE `Sells` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -200,7 +231,7 @@ CREATE TABLE `User` (
   `login` varchar(45) NOT NULL,
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`iduser`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -209,7 +240,7 @@ CREATE TABLE `User` (
 
 LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
-INSERT INTO `User` VALUES (2,'caio','kaineo2','$2y$10$7Zd.TmqTqamNCRy.m7uUu.hn/yM9jYZafPcOFjnlBaCtIa2w55OgC'),(3,'Caio','kaineo','$2y$10$ZS9eHsw1qCXICJ3uQcNnYuTyE0nRhsqzxNA232XEmTfqx6vXQaHly'),(4,'Caio','caio','$2y$10$k.MECSgN.tz4YzJsgiEY7O6q/.A5iD5qLY038xkcU0ViBOVXWkKo6'),(5,'Caio2','caio2','$2y$10$LJMD3IaARs9URC9BTMUhD.VT1sGyFj3UjPawDtK5ECaBG29hXMit2');
+INSERT INTO `User` VALUES (2,'caio','kaineo2','$2y$10$7Zd.TmqTqamNCRy.m7uUu.hn/yM9jYZafPcOFjnlBaCtIa2w55OgC'),(3,'Caio','kaineo','$2y$10$4qagsx/k23DGi.S9y0A8jefIErtpW9c4aezwGN3Xl8w3hcHqXBlR.'),(4,'Caio','caio','$2y$10$k.MECSgN.tz4YzJsgiEY7O6q/.A5iD5qLY038xkcU0ViBOVXWkKo6'),(5,'Caio2','caio2','$2y$10$LJMD3IaARs9URC9BTMUhD.VT1sGyFj3UjPawDtK5ECaBG29hXMit2'),(6,'Jeff','jeff','$2y$10$f1hMjKuOc/cCpr/ssFxaXu75XPqxXUNMG.TA.C9ZeHI96pJ9MXpwO');
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -222,4 +253,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-19 17:27:58
+-- Dump completed on 2017-05-23 16:50:19
