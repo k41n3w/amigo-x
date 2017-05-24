@@ -70,4 +70,7 @@ ocApp.controller('loginController', function ($http, $scope, $rootScope, $window
         }
         return undefined;
     }
+    $scope.cadastro = function () {
+        $location.path('/cadastrar-usuario');
+    };
 });

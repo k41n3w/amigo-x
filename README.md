@@ -24,7 +24,7 @@ E aguarde o download das dependências.
 Importe o banco amigo-x.sql que esta na pasta amigo-x/database
 
 **Configure a conexão com o banco**
-Na pasta amigo-x/api/conf terá o arquivo config.php altere as linhas para que esteja como seu banco local_file
+Na pasta amigo-x/api/conf terá o arquivo config.php altere as linhas para que esteja como seu banco local
 
 **Configure o caminho do WS**
 Na pasta amigo-x/app/views/js no arquivo ocApp na linha 22 mude o BASEURL para que fique com mesmo caminho da pasta do projeto
