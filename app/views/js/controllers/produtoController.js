@@ -75,7 +75,7 @@ ocApp.controller('produtoController', function ($http, $scope, toastr, BASEURL, 
           if (data.codigo === 0) {
               toastr.error('Erro ao entrar no grupo.');
           }else{
-              toastr.success('Parabéns agora você faz parte do grupo.');
+              toastr.success('Produto adicionado a sua lista.');
           }
       }).error(function (error) {
 

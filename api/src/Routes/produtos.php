@@ -61,4 +61,15 @@ $app->group('/produto', function () use ($app) {
         return $response->withJson($objProduto->listar($arrRequest));
     });
 
+    /**
+     * Método utilizado: GET
+     *
+     * Nivel de Acesso: Gerente
+     *
+     * Retorno: Lista de Usuários cadastrados.
+     */
+    $app->post('/meus-produtos', function (Request $request, Response $response) use ($objProduto) {
+        $arrRequest = $request->getParsedBody();
+        return $response->withJson($objProduto->listarMeusProdutos($arrRequest));
+    });
 });

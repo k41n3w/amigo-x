@@ -78,6 +78,10 @@ ocApp.config(function($routeProvider) {
             templateUrl: 'pages/grupos-desejos.html',
             controller: 'gruposDesejosController'
         })
+        .when('/meus-produtos', {
+            templateUrl: 'pages/meus-produtos.html',
+            controller: 'meusProdutoController'
+        })
         .otherwise({
             redirectTo: '/login'
         });
@@ -86,7 +90,7 @@ ocApp.config(function($routeProvider) {
 // opções do toastr message
 ocApp.config(function(toastrConfig) {
     angular.extend(toastrConfig, {
-        "positionClass": "toast-center-center",
+        "positionClass": "toast-bottom-right",
         "closeButton": true,
         "maxOpened": 1,
         "extendedTimeOut": 5000

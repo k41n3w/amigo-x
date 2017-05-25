@@ -66,9 +66,15 @@ class Grupo extends AppModel
         if ($pesquisaGrupo['name'] !== '') {
             $pesquisaGrupo['name'] = '%'.$pesquisaGrupo['name'].'%';
 
-            $sql = "SELECT * FROM Grupo
-                        WHERE name LIKE :name
-                        AND owner <> :iduser";
+            $sql = "select g.idgroup, g.name
+                    from Grupo as g
+                    where g.idgroup
+                    not IN (
+                        select
+                        distinct gin.idgroup
+                        from Groups_in as gin
+                        where gin.iduser = :iduser)
+                    AND g.name LIKE :name";
 
             $Grupo = $this->executeSQL($sql, [':name' => $pesquisaGrupo['name'], ':iduser' => $iduser]);
             if ($Grupo) {
@@ -77,8 +83,14 @@ class Grupo extends AppModel
                 return Retorno::erro('Grupo nao encontrado.');
             }
         }
-        $sql = "SELECT * FROM Grupo
-                WHERE owner <> :iduser;";
+        $sql = "select g.idgroup, g.name
+                from Grupo as g
+                where g.idgroup
+                not IN (
+                    select
+                    distinct gin.idgroup
+                    from Groups_in as gin
+                    where gin.iduser = :iduser)";
 
         $Grupo = $this->executeSQL($sql, [':iduser' => $iduser]);
         if ($Grupo) {

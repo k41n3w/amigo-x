@@ -113,4 +113,26 @@ class Produto extends AppModel
             return Retorno::erro('Algo de errado aconteceu, contate o administrador do sistema.');
         }
     }
+
+    /**
+     * Método responsável por listar os produtos cadastrados no banco de dados.
+     *
+     * @param  [Integer] $idProduto ID do produto (Opcional)
+     * @return [Array]              Lista de produtos.
+     */
+    public function listarMeusProdutos($pesquisaProduto = null)
+    {
+
+        $sql = "SELECT p.description, p.idproducts, p.value FROM Products as p
+                LEFT JOIN Sells as s
+                	ON p.idproducts = s.idproducts
+                WHERE s.iduser = :iduser";
+
+        $produto = $this->executeSQL($sql, [':iduser' => $iduser]);
+        if ($produto) {
+            return Retorno::sucesso($produto);
+        }else{
+            return Retorno::erro('Nenhum produto encontrado.');
+        }
+    }
 }
