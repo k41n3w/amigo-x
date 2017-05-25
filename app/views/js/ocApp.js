@@ -82,6 +82,10 @@ ocApp.config(function($routeProvider) {
             templateUrl: 'pages/meus-produtos.html',
             controller: 'meusProdutoController'
         })
+        .when('/brincadeira', {
+            templateUrl: 'pages/brincadeira.html',
+            controller: 'brincadeiraController'
+        })
         .otherwise({
             redirectTo: '/login'
         });

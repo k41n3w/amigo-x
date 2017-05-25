@@ -1,0 +1,34 @@
+<header class="header-page edit-request">
+    <h1>Brincadeira</h1>
+</header>
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <section class="box fix-height">
+                  <form
+                      id="loginForm"
+                      name="loginForm"
+                      role="form"
+                      ng-submit="brincar()"
+                      novalidate
+                  >
+                  <span ng-show="mostrarAmigos">{{origem}} saiu com: {{destino}}</span>
+                      <div class="form-label text-center">
+                          <input
+                              class="btn btn-primary"
+                              type="submit"
+                              value="Mostrar Amigos!"
+                              ng-click="brincadeira()"
+                              ng-show="!mostrarAmigos"
+                          />
+                      </div>
+                      <div class="form-label text-center">
+                          <input
+                              class="btn btn-primary"
+                              type="submit"
+                              value="Proximo"
+                              ng-click="proximo()"
+                              ng-show="mostrarAmigos"
+                          />
+                      </div>
+                  </form>
+        </section>
+</div>

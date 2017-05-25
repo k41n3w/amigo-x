@@ -21,4 +21,18 @@ $app->group('/sorteio', function () use ($app) {
         return $response->withJson($objSorteio->sorteio($arrRequest));
     });
 
+    /**
+     * Método utilizado: POST
+     * Parâmetros esperados: [String]  nome
+     *                       [String]  login
+     *                       [String]  senha
+     *
+     *
+     * Retorno: Resposta no formato JSON contendo as informações do cadastro do usuário.
+     */
+    $app->post('/listar-sorteio-grupo', function (Request $request, Response $response) use ($objSorteio) {
+        $arrRequest = $request->getParsedBody();
+        return $response->withJson($objSorteio->listarGrupoSorteio($arrRequest));
+    });
+
 });

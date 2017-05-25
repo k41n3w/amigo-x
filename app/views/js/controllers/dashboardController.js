@@ -6,6 +6,11 @@ $scope.search = {
   grupoParticipante: ''
 };
 
+$scope.brincadeira = function () {
+    $location.path('/brincadeira');
+    $rootScope.modal = 0;
+};
+
 $scope.grupoFinalized = function(opcao) {
     if (opcao.finalized == 1) {
         $rootScope.finalized = true;
@@ -76,25 +81,6 @@ $scope.sortear = function(opcao) {
         }
     }).error(function (error) {
         console.log(error);
-    });
-};
-
-$scope.brincadeira = function(opcao) {
-    url = BASEURL + '';
-    var config = {
-        headers: { 'Content-Type': 'application/json;charset=utf-8;' }
-    };
-
-    console.log(dadosConsulta);
-    $http.post(url, dadosSorteio, config).success(function (data) {
-      console.log(data);
-        if (data.codigo === 1){
-
-        }else{
-
-        }
-    }).error(function (error) {
-
     });
 };
 

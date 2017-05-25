@@ -114,4 +114,33 @@ class Sorteio extends AppModel
     	}
     }
 
+    /**
+     * Método responsável por listar os sorteios cadastrados no banco de dados.
+     *
+     * @param  [Integer] $idSorteio ID do sorteio (Opcional)
+     * @return [Array]              Lista de sorteios.
+     */
+    public function listarGrupoSorteio($pesquisaSorteio = null)
+    {
+        $sql = "SELECT * FROM Lottery_relation
+                        WHERE idgroup = idgroup";
+
+        $sorteio = $this->executeSQL($sql, [':idgroup' => $pesquisaSorteio['idgroup']]);
+        $brincadeira = [];
+        foreach ($sorteio as $key => $value) {
+            $origem = $this->select(QueryBuilder::select('User', [], ['iduser' => '']), ['iduser' => $value['iduserorigin']]);
+            $destino = $this->select(QueryBuilder::select('User', [], ['iduser' => '']), ['iduser' => $value['iduserdestination']]);
+            $arrAux = [
+                'origem' => $origem[0]['name'],
+                'destino' => $destino[0]['name']
+            ];
+            array_push($brincadeira, $arrAux);
+        }
+        if ($brincadeira) {
+                return Retorno::sucesso($brincadeira);
+            }else{
+                return Retorno::erro('Mensagens nao encontrado.');
+        }
+    }
+
 }
