@@ -26,7 +26,7 @@ $scope.listarMeusDesejos();
         rowTemplate:'<div ng-class="{ inativo : row.entity.inativo==true }"> <div ng-repeat="col in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ui-grid-cell></div></div>',
         columnDefs: [
             { field: 'description', displayName: 'Descrição', minWidth:200 },
-            { field: 'value', displayName: 'Preço', minWidth:200 },
+            { field: 'value', cellFilter: 'currency', displayName: 'Preço', minWidth:200 },
         ],
           data: []
     };

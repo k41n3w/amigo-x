@@ -30,7 +30,8 @@ class Grupo extends AppModel
 
         $arrDadosGrupoInsert = [
             'name'=> $arrDadosGrupo['name'],
-            'owner'=> $idUser
+            'owner'=> $idUser,
+            'finalized' => 0
         ];
         // Salva no banco de dados.
         $salvaGrupo = $this->execute(QueryBuilder::insert('Grupo', $arrDadosGrupoInsert), $arrDadosGrupoInsert);
@@ -42,7 +43,6 @@ class Grupo extends AppModel
             $arrDadosGrupo_inInsert = [
                 'idgroup'=>$idGrupo,
                 'iduser'=> $idUser,
-                'finalized' => 0
             ];
             $salvaGrupo = $this->execute(QueryBuilder::insert('Groups_in', $arrDadosGrupo_inInsert), $arrDadosGrupo_inInsert);
             if ($salvaGrupo) {

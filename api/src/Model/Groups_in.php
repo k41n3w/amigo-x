@@ -26,8 +26,7 @@ class Groups_in extends AppModel
 
         $arrDadosGrupo = [
             'idgroup' => $arrDadosGrupo['idgroup'],
-            'iduser' => $idUser,
-            'finalized' => 0
+            'iduser' => $idUser
         ];
 
         // Salva no banco de dados.

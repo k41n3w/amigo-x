@@ -1,10 +1,21 @@
-ocApp.controller('dashboardController', function ($http, $location, BASEURL, $scope, $window, $rootScope, toastr) {
+ocApp.controller('dashboardController', function ($http, $timeout, $location, BASEURL, $scope, $window, $rootScope, toastr) {
 //$scope.Nome = $window.localStorage.getItem('userNome');
 
 $scope.search = {
   meusGrupos: '',
   grupoParticipante: ''
-}
+};
+
+$scope.grupoFinalized = function(opcao) {
+    if (opcao.finalized == 1) {
+        $rootScope.finalized = true;
+        $rootScope.idgroup = opcao.idgroup;
+    }else{
+        $rootScope.finalized = false;
+    }
+    $rootScope.idgroup = opcao.idgroup;
+    console.log($rootScope.idgroup);
+};
 
 $scope.pesquisar = function(opcao) {
     var url = '';
@@ -44,21 +55,27 @@ $scope.pesquisar = function(opcao) {
 };
 
 $scope.sortear = function(opcao) {
-    url = BASEURL + '';
+    url = BASEURL + 'sorteio/sorteio-grupo';
     var config = {
         headers: { 'Content-Type': 'application/json;charset=utf-8;' }
     };
 
-    console.log(dadosConsulta);
-    $http.post(url, dadosSorteio, config).success(function (data) {
+    opcao = {
+        idgroup: opcao
+    };
+
+    $http.post(url, opcao, config).success(function (data) {
       console.log(data);
         if (data.codigo === 1){
-
+            toastr.success('Sorteio Realizado com sucesso');
+            $timeout(function () {
+                $window.location.reload();
+            }, 2000);
         }else{
-
+            toastr.error(response.retorno, 'Erro');
         }
     }).error(function (error) {
-
+        console.log(error);
     });
 };
 
@@ -87,7 +104,7 @@ $scope.gridMeusGrupos = {
     paginationPageSize: 10,
     enableVerticalScrollbar: 0,
     rowHeight:35,
-    rowTemplate:'<div ng-class="{ danger : isOverdue(row), info : row.entity.nomestatus == &quot;Concluído&quot;, success : row.entity.nomestatus == &quot;Aberto&quot;, refused : row.entity.nomestatus == &quot;Recusado&quot;  }"> <div ng-repeat="col in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ui-grid-cell></div></div>',
+    rowTemplate:'<div ng-class="{ success : row.entity.finalized == &quot;1&quot;}"> <div ng-repeat="col in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ui-grid-cell></div></div>',
 
     columnDefs: [
         {
@@ -95,10 +112,10 @@ $scope.gridMeusGrupos = {
             displayName: 'Acompanhar',
             enableColumnMenu: false,
             enableSorting: false,
-            cellTemplate:'<a role="button" ng-click="" data-toggle="modal" data-target="#modalMeuGrupo" class="table-icon"><i class="fa fa-eye" aria-hidden="true"></i></a>',
+            cellTemplate:'<a role="button" ng-click="grid.appScope.grupoFinalized(row.entity)" data-toggle="modal" data-target="#modalMeuGrupo" class="table-icon"><i class="fa fa-eye" aria-hidden="true"></i></a>',
             width: 100
         },
-        { field: 'name', displayName: 'Nome', width: 400 },
+        { field: 'name', displayName: 'Nome'},
     ],
       data: []
 };
@@ -109,7 +126,7 @@ $scope.gridGruposParticipantes = {
   paginationPageSize: 10,
   enableVerticalScrollbar: 0,
   rowHeight:35,
-  rowTemplate:'<div ng-class="{ danger : isOverdue(row), info : row.entity.nomestatus == &quot;Concluído&quot;, success : row.entity.nomestatus == &quot;Aberto&quot;, refused : row.entity.nomestatus == &quot;Recusado&quot;  }"> <div ng-repeat="col in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ui-grid-cell></div></div>',
+  rowTemplate:'<div ng-class="{ danger : row.entity.finalized == &quot;1&quot;, info : row.entity.nomestatus == &quot;Concluído&quot;, success : row.entity.nomestatus == &quot;Aberto&quot;, refused : row.entity.nomestatus == &quot;Recusado&quot;  }"> <div ng-repeat="col in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ui-grid-cell></div></div>',
 
   columnDefs: [
       {

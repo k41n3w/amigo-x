@@ -121,7 +121,7 @@ ocApp.controller('produtoController', function ($http, $scope, toastr, BASEURL, 
                 width: 80
             },
             { field: 'description', displayName: 'Descrição', minWidth:200 },
-            { field: 'value', displayName: 'Preço', minWidth:200 },
+            { field: 'value', cellFilter: 'currency', displayName: 'Preço', minWidth:200 },
             {
                 field: 'idproducts',
                 displayName: 'Desejar',

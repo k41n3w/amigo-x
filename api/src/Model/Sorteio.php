@@ -19,43 +19,56 @@ class Sorteio extends AppModel
      */
     public function sorteio($arrDadosSorteio)
     {
-        global $grupo;
         // Verifica se já existe se ja existe o usuario cadastrado no sistema.
         $grupo = $this->select(QueryBuilder::select('Groups_in', [], ['idgroup' => '']), ['idgroup' => $arrDadosSorteio['idgroup']]);
         if (!$grupo) {
-            return Retorno::erro('Usuario Origem não cadastrado no sistema.');
+            return Retorno::erro('Grupo não cadastrado no sistema.');
         }
 
-        foreach($grupo AS $participante) {
-            if(count($grupo) > 1) {
-        		srand((float) microtime() * 10000000);
-        		$sorteado = array_rand($grupo);
-        		if($grupo[ $sorteado ]['iduser'] != $participante['iduser']) {
-        			$escolhido = $nomes[ $sorteado ];
-        			unset($grupo[ $sorteado ]);
-        			return $escolhido;
-        		}
-        		else {
-        			return sorteio($id);
-        		}
-        	}
-        	else {
-        		foreach ($grupo as $grupo) {
-        			return $grupo;
-        		}
-        	}
+        $qtdPessoasGrupo = count($grupo);
+        if ($qtdPessoasGrupo < 2) {
+            return Retorno::erro('Quantidade de pessoas insuficiente para realizar sorteio.');
         }
 
-        return 'oi';
-        // Salva no banco de dados.
-        $salvaSorteio = $this->execute(QueryBuilder::insert('Mensages', $arrDadosSorteio), $arrDadosSorteio);
+        $sorteio = [];
+        do {
+            $numSorteio = count($grupo);
+            $random = rand(0,($numSorteio));
+            if ($grupo[$random] != null) {
+                array_push($sorteio, $grupo[$random]);
+                unset($grupo[$random]);
+            }
+        } while (count($sorteio) < ($qtdPessoasGrupo - 1));
+        foreach ($grupo as $key => $value) {
+            array_push($sorteio, $value);
+        }
 
-        if ($salvaSorteio) {
-            return Retorno::sucesso('Sorteio cadastrada com sucesso.');
+        $salva = [];
+        foreach ($sorteio as $key => $value) {
+            $salva[$key] = [
+                'idgroup' => $value['idgroup'],
+                'iduserorigin' => $value['iduser'],
+                'iduserdestination' => $sorteio[$key+1]['iduser']
+            ];
+        }
+        $ultimoUser = count($salva);
+        $salva[$ultimoUser - 1]['iduserdestination'] = $sorteio[0]['iduser'];
+
+        foreach ($salva as $key => $value) {
+            $salvaSorteio = $this->execute(QueryBuilder::insert('Lottery_relation', $value), $value);
+            if (!$salvaSorteio) {
+                return Retorno::erro('Algo de errado aconteceu no cadastro, contate o administrador do sistema.');
+            }
+        }
+
+        $sql = "UPDATE Grupo SET finalized = 1 WHERE idgroup = :idgroup";
+
+        $sorteio = $this->execute($sql, [':idgroup' => $arrDadosSorteio['idgroup']]);
+        if ($sorteio) {
+            return Retorno::sucesso('Sorteio realizado com sucesso');
         }else{
-            return Retorno::erro('Algo de errado aconteceu no cadastro, contate o administrador do sistema.');
+            return Retorno::erro('Algo de errado aconteceu no cadastro, contate o administrador do sistema.1');
         }
-
     }
 
     /**
