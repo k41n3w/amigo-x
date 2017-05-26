@@ -19,12 +19,8 @@ class Sorteio extends AppModel
      */
     public function sorteio($arrDadosSorteio)
     {
-        // Verifica se já existe se ja existe o usuario cadastrado no sistema.
+        // Verifica se existem pessoas associadas ao grupo que sejam suficiente para fazer a brincadeira
         $grupo = $this->select(QueryBuilder::select('Groups_in', [], ['idgroup' => '']), ['idgroup' => $arrDadosSorteio['idgroup']]);
-        if (!$grupo) {
-            return Retorno::erro('Grupo não cadastrado no sistema.');
-        }
-
         $qtdPessoasGrupo = count($grupo);
         if ($qtdPessoasGrupo < 2) {
             return Retorno::erro('Quantidade de pessoas insuficiente para realizar sorteio.');

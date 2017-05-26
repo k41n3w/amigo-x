@@ -68,7 +68,7 @@ $scope.sortear = function(opcao) {
     opcao = {
         idgroup: opcao
     };
-
+    console.log(opcao);
     $http.post(url, opcao, config).success(function (data) {
       console.log(data);
         if (data.codigo === 1){
@@ -77,7 +77,7 @@ $scope.sortear = function(opcao) {
                 $window.location.reload();
             }, 2000);
         }else{
-            toastr.error(response.retorno, 'Erro');
+            toastr.error(data.retorno, 'Erro');
         }
     }).error(function (error) {
         console.log(error);
