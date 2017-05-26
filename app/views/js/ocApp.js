@@ -4,9 +4,9 @@ var ocApp = angular.module('ocApp', ['ngRoute', 'angularFileUpload', 'blockUI', 
             toastr.clear();
             // Verifica se existe um token ativo, caso negativo, redireciona de volta
             // para o login.
-            // if (!AuthService.isAuthed()) {
-            //     $location.path('/login');
-            // }
+            if (!AuthService.isAuthed()) {
+                $location.path('/login');
+            }
             /*
              * Salva os dados do usuário da localStorage no rootScope para ser utilizado
              * pelo sistema.
