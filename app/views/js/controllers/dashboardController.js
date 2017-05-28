@@ -18,8 +18,8 @@ $scope.grupoFinalized = function(opcao) {
     }else{
         $rootScope.finalized = false;
     }
-    $rootScope.idgroup = opcao.idgroup;
-    console.log($rootScope.idgroup);
+    $window.localStorage.setItem('idgroup', opcao.idgroup);
+    console.log(opcao.idgroup);
 };
 
 $scope.pesquisar = function(opcao) {

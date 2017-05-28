@@ -11,15 +11,12 @@ ocApp.controller('produtoController', function ($http, $scope, toastr, BASEURL, 
   };
 
   $scope.cadastrar = function () {
-    var texto = $('.btn-login').html();
-    $('.btn-login').html('<span class="ajaxloader"></span>');
-      $scope.submitted = true;
       var url =  BASEURL + 'produto/cadastrar-produto';
       var config = {
           headers: {'Content-Type': 'application/json'}
       };
       console.log($scope.produto);
-      parseFloat($scope.produto.value);
+      // parseFloat($scope.produto.value);
       $http.post(url, $scope.produto, config).success(function (response) {
           console.log(response);
           if (response.codigo == 1) {

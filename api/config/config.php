@@ -8,7 +8,7 @@ return [
     'databases' => [
         'mysql' => [
             'database' => 'mysql',
-            'host' => '192.168.113.86',
+            'host' => 'localhost',
             'port' => '3306',
             'dbname' => 'amigo_x',
             'user' => 'root',
