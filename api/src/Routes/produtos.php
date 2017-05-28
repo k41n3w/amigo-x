@@ -70,6 +70,6 @@ $app->group('/produto', function () use ($app) {
      */
     $app->post('/meus-produtos', function (Request $request, Response $response) use ($objProduto) {
         $arrRequest = $request->getParsedBody();
-        return $response->withJson($objProduto->listarMeusProdutos($arrRequest));
+        return $response->withJson($objProduto->listarMeusProdutos($this->jwt->dadosUsuario->userId));
     });
 });

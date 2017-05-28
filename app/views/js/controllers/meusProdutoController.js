@@ -5,7 +5,7 @@ ocApp.controller('meusProdutoController', function ($http, $scope, toastr, BASEU
   };
 
   $scope.searchProdutos = function () {
-      var url =  BASEURL + 'produto/listar-produtos';
+      var url =  BASEURL + 'produto/meus-produtos';
       var config = {
           headers: {'Content-Type': 'application/json'}
       };
@@ -23,7 +23,6 @@ ocApp.controller('meusProdutoController', function ($http, $scope, toastr, BASEU
           }
       }).error(function (error) {
           console.log(error);
-          toastr.error(error.message, 'Erro');
           $scope.gridOptions.data = '';
       });
   };

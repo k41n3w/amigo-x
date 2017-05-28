@@ -19,9 +19,9 @@ ocApp.controller('loginController', function ($http, $scope, $rootScope, $window
         var config = {
             headers: {'Content-Type': 'application/json'}
         };
-        console.log($scope.user);
+      //  console.log($scope.user);
         $http.post(url, $scope.user, config).success(function (response) {
-            console.log(response);
+          //  console.log(response);
             if ($scope.verificaToken(response.retorno.token)) {
                 AuthService.saveToken(response.retorno.token);
                 $scope.salvaUsuarioDepto(response.retorno.userNome, response.retorno.userId);
@@ -34,7 +34,7 @@ ocApp.controller('loginController', function ($http, $scope, $rootScope, $window
             $('.ajaxloader').remove();
             $('.btn-login').html(texto);
         }).error(function (error) {
-            console.log(error);return;
+          //  console.log(error);return;
             toastr.error(error.message, 'Login Inválido');
             $('.ajaxloader').remove();
             $('.btn-login').html(texto);

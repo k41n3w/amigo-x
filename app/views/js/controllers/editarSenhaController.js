@@ -16,9 +16,9 @@ ocApp.controller('editarSenhaController', function ($scope, $http, toastr, BASEU
             "senhaantiga": $scope.request.oldPasswd,
             "senhanova": $scope.request.newPasswd
         };
-        console.log(dadosSenha);
+        //console.log(dadosSenha);
         $http.post(url, dadosSenha, config).success(function(data){
-            console.log(data);
+            //console.log(data);
             if(data.codigo === 1) {
                 toastr.success(data.retorno);
             }else{

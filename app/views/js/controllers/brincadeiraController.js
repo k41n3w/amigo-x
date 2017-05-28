@@ -3,7 +3,7 @@ ocApp.controller('brincadeiraController', function ($http, $scope, toastr, BASEU
       name: ''
   };
   $rootScope.idgroup = $window.localStorage.getItem('idgroup');
-  console.log($rootScope.idgroup);
+  //console.log($rootScope.idgroup);
   $scope.mostrarAmigosFim = false;
   $scope.mostrarAmigosIn = false;
   $scope.count = 0;
@@ -22,9 +22,9 @@ if ($rootScope.modal === 0) {
       idGroup = {
           idgroup: $rootScope.idgroup
       };
-console.log($rootScope.idgroup);
+//console.log($rootScope.idgroup);
       $http.post(url, idGroup, config).success(function (response) {
-          console.log(response);
+          //console.log(response);
           if (response.codigo == 1) {
               $scope.amigosSorteados =response.retorno;
               $scope.mostrarAmigos = true;

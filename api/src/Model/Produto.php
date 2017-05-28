@@ -120,7 +120,7 @@ class Produto extends AppModel
      * @param  [Integer] $idProduto ID do produto (Opcional)
      * @return [Array]              Lista de produtos.
      */
-    public function listarMeusProdutos($pesquisaProduto = null)
+    public function listarMeusProdutos($iduser )
     {
 
         $sql = "SELECT p.description, p.idproducts, p.value FROM Products as p

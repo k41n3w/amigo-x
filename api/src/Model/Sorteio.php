@@ -47,6 +47,7 @@ class Sorteio extends AppModel
                 'iduserdestination' => $sorteio[$key+1]['iduser']
             ];
         }
+
         $ultimoUser = count($salva);
         $salva[$ultimoUser - 1]['iduserdestination'] = $sorteio[0]['iduser'];
 
@@ -60,6 +61,7 @@ class Sorteio extends AppModel
         $sql = "UPDATE Grupo SET finalized = 1 WHERE idgroup = :idgroup";
 
         $sorteio = $this->execute($sql, [':idgroup' => $arrDadosSorteio['idgroup']]);
+
         if ($sorteio) {
             return Retorno::sucesso('Sorteio realizado com sucesso');
         }else{
@@ -87,27 +89,6 @@ class Sorteio extends AppModel
                 return Retorno::erro('Mensagens nao encontrado.');
             }
         }
-    }
-
-    public function Sortear($id = 0) {
-    	global $grupo;
-    	if(count($grupo) > 1) {
-    		srand((float) microtime() * 10000000);
-    		$sorteado = array_rand($grupo);
-    		if($grupo[ $sorteado ]['iduser'] != $id) {
-    			$escolhido = $nomes[ $sorteado ];
-    			unset($grupo[ $sorteado ]);
-    			return $escolhido;
-    		}
-    		else {
-    			return sorteio($id);
-    		}
-    	}
-    	else {
-    		foreach ($grupo as $grupo) {
-    			return $grupo;
-    		}
-    	}
     }
 
     /**
@@ -138,5 +119,26 @@ class Sorteio extends AppModel
                 return Retorno::erro('Mensagens nao encontrado.');
         }
     }
+
+    public function Sortear($id = 0) {
+  global $grupo;
+  if(count($grupo) > 1) {
+    srand((float) microtime() * 10000000);
+    $sorteado = array_rand($grupo);
+    if($grupo[ $sorteado ]['iduser'] != $id) {
+      $escolhido = $nomes[ $sorteado ];
+      unset($grupo[ $sorteado ]);
+      return $escolhido;
+    }
+    else {
+      return sorteio($id);
+    }
+  }
+  else {
+    foreach ($grupo as $grupo) {
+      return $grupo;
+    }
+  }
+} 
 
 }

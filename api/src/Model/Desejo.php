@@ -71,11 +71,17 @@ class Desejo extends AppModel
             return Retorno::erro('Favor informar o id do desejo a ser alterado.');
         }
 
-        $sql = "SELECT Products.description, Products.value FROM Products
-                INNER JOIN User
-                INNER JOIN Desejo
-                WHERE Desejo.iduser = :iduser
-                group by Products.description, Products.value";
+        $sql = "SELECT p.idproducts, p.description, p.value, u.iduser, u.name as username, g.name as gruponame
+                        FROM Products as p
+                        LEFT JOIN Desejo as d
+        					ON p.idproducts = d.idproducts
+        				LEFT JOIN User as u
+        					ON u.iduser = d.iduser
+        				LEFT JOIN Groups_in as gin
+        					ON gin.iduser = u.iduser
+        				LEFT JOIN Grupo as g
+        					ON g.idgroup = gin.idgroup
+                        WHERE d.iduser = :iduser";
 
         $desejo = $this->executeSQL($sql, [':iduser' => $userId]);
         if ($desejo) {

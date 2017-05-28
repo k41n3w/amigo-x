@@ -6,7 +6,7 @@ ocApp.controller('participarGrupoController', function ($http, BASEURL, $scope, 
     $scope.grupo = function (idgroup) {
         $rootScope.idGroup = idgroup.idgroup;
         $rootScope.nameGroup = idgroup.name;
-        console.log($rootScope.idGriup);
+        //console.log($rootScope.idGriup);
     };
 
     $scope.searchResult = function () {
@@ -17,9 +17,9 @@ ocApp.controller('participarGrupoController', function ($http, BASEURL, $scope, 
         if ($scope.search.name === undefined) {
           $scope.search.name = '';
         }
-        console.log($scope.search);
+        //console.log($scope.search);
         $http.post(url, $scope.search, config).success(function (data) {
-            console.log(data);
+            //console.log(data);
             if (data.codigo == 1) {
                 $scope.gridOptions.data = data.retorno;
             }else{
@@ -40,9 +40,9 @@ ocApp.controller('participarGrupoController', function ($http, BASEURL, $scope, 
         $scope.inGroup = {
           'idgroup': $rootScope.idGroup
         };
-        console.log($scope.inGroup);
+        //console.log($scope.inGroup);
         $http.post(url, $scope.inGroup, config).success(function (data) {
-            console.log(data);
+            //console.log(data);
             if (data.codigo === 0) {
                 toastr.error('Erro ao entrar no grupo.');
             }else{

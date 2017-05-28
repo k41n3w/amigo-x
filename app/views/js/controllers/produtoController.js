@@ -7,7 +7,7 @@ ocApp.controller('produtoController', function ($http, $scope, toastr, BASEURL, 
   $scope.compra = function (idgroup) {
       $rootScope.description = idgroup.description;
       $rootScope.idproducts = idgroup.idproducts;
-      console.log($rootScope.idproducts);
+      //console.log($rootScope.idproducts);
   };
 
   $scope.cadastrar = function () {
@@ -15,10 +15,10 @@ ocApp.controller('produtoController', function ($http, $scope, toastr, BASEURL, 
       var config = {
           headers: {'Content-Type': 'application/json'}
       };
-      console.log($scope.produto);
+      //console.log($scope.produto);
       // parseFloat($scope.produto.value);
       $http.post(url, $scope.produto, config).success(function (response) {
-          console.log(response);
+          //console.log(response);
           if (response.codigo == 1) {
               toastr.success(response.retorno);
               $scope.produto.description = '';
@@ -27,7 +27,7 @@ ocApp.controller('produtoController', function ($http, $scope, toastr, BASEURL, 
               toastr.error(response.retorno, 'Erro');
           }
       }).error(function (error) {
-          console.log(error);
+          //console.log(error);
           toastr.error(error.message, 'Erro');
 
       });
@@ -41,9 +41,9 @@ ocApp.controller('produtoController', function ($http, $scope, toastr, BASEURL, 
       if ($scope.produto.description === '' || $scope.produto.description === undefined || $scope.produto.description === null) {
         $scope.produto.description = '';
       }
-      console.log($scope.produto);
+      //console.log($scope.produto);
       $http.post(url, $scope.produto, config).success(function (data) {
-          console.log(data.retorno);
+          //console.log(data.retorno);
           if (data.codigo == 1) {
               $scope.gridOptions.data = data.retorno;
           } else {
@@ -51,7 +51,7 @@ ocApp.controller('produtoController', function ($http, $scope, toastr, BASEURL, 
               $scope.gridOptions.data = '';
           }
       }).error(function (error) {
-          console.log(error);
+        //  console.log(error);
           toastr.error(error.message, 'Erro');
           $scope.gridOptions.data = '';
       });
@@ -66,9 +66,9 @@ ocApp.controller('produtoController', function ($http, $scope, toastr, BASEURL, 
       $scope.venda = {
         'idproducts': $rootScope.idproducts
       };
-      console.log($scope.venda);
+      //console.log($scope.venda);
       $http.post(url, $scope.venda, config).success(function (data) {
-          console.log(data);
+          //console.log(data);
           if (data.codigo === 0) {
               toastr.error('Erro ao entrar no grupo.');
           }else{
@@ -88,9 +88,9 @@ ocApp.controller('produtoController', function ($http, $scope, toastr, BASEURL, 
       $scope.deseja = {
         'idproducts': $rootScope.idproducts
       };
-      console.log($scope.deseja);
+      //console.log($scope.deseja);
       $http.post(url, $scope.deseja, config).success(function (data) {
-          console.log(data);
+        //  console.log(data);
           if (data.codigo === 0) {
               toastr.error('Erro ao entrar no grupo.');
           }else{

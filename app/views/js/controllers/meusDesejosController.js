@@ -4,9 +4,9 @@ ocApp.controller('meusDesejosController', function ($http, $scope, toastr, BASEU
       var config = {
           headers: { 'Content-Type': 'application/json;charset=utf-8;' }
       };
-      console.log($scope.venda);
+      //console.log($scope.venda);
       $http.post(url, $scope.venda, config).success(function (data) {
-          console.log(data);
+          //console.log(data);
           if (data.codigo === 0) {
               $scope.gridOptions.data = '';
           }else{

@@ -4,9 +4,9 @@ ocApp.controller('gruposDesejosController', function ($http, $scope, toastr, BAS
       var config = {
           headers: { 'Content-Type': 'application/json;charset=utf-8;' }
       };
-      console.log($scope.venda);
+    //  console.log($scope.venda);
       $http.post(url, $scope.venda, config).success(function (data) {
-          console.log(data);
+        //  console.log(data);
           if (data.codigo === 0) {
               toastr.error('Erro ao Listar Desejos.');
               $scope.gridOptions.data = '';

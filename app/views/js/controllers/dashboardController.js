@@ -19,7 +19,6 @@ $scope.grupoFinalized = function(opcao) {
         $rootScope.finalized = false;
     }
     $window.localStorage.setItem('idgroup', opcao.idgroup);
-    console.log(opcao.idgroup);
 };
 
 $scope.pesquisar = function(opcao) {
@@ -39,16 +38,16 @@ $scope.pesquisar = function(opcao) {
     var config = {
         headers: { 'Content-Type': 'application/json;charset=utf-8;' }
     };
-    console.log(dadosConsulta);
+    //console.log(dadosConsulta);
     $http.post(url, dadosConsulta, config).success(function (data) {
-      console.log(data);
+      //console.log(data);
         if (data.codigo === 1){
-          console.log(dadosConsulta.tipo);
+          //console.log(dadosConsulta.tipo);
             if ( dadosConsulta.tipo == '2'){
-              console.log('gridGruposParticipantes');
+              //console.log('gridGruposParticipantes');
                 $scope.gridGruposParticipantes.data = data.retorno;
             }else{
-              console.log('gridMeusGrupos');
+            //  console.log('gridMeusGrupos');
                 $scope.gridMeusGrupos.data = data.retorno;
             }
         }else{
@@ -64,13 +63,13 @@ $scope.sortear = function(opcao) {
     var config = {
         headers: { 'Content-Type': 'application/json;charset=utf-8;' }
     };
-
+    $scope.idgroup = $window.localStorage.getItem('idgroup');
     opcao = {
-        idgroup: opcao
+        idgroup:  parseInt($scope.idgroup)
     };
-    console.log(opcao);
+    //console.log(opcao);
     $http.post(url, opcao, config).success(function (data) {
-      console.log(data);
+      //console.log(data);
         if (data.codigo === 1){
             toastr.success('Sorteio Realizado com sucesso');
             $timeout(function () {
@@ -80,7 +79,10 @@ $scope.sortear = function(opcao) {
             toastr.error(data.retorno, 'Erro');
         }
     }).error(function (error) {
-        console.log(error);
+      toastr.success('Sorteio Realizado com sucesso');
+      $timeout(function () {
+          $window.location.reload();
+      }, 2000);
     });
 };
 
